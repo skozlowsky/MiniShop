@@ -20,12 +20,6 @@ var inventoryDb = postgres.AddDatabase("inventoryDb", "inventory");
 var catalogDb = postgres.AddDatabase("catalogDb", "catalog");
 var orderDb = postgres.AddDatabase("orderDb", "order");
 
-var maildev = builder.AddContainer("maildev", "maildev/maildev")
-    .WithContainerName("maildev.aspire")
-    .WithEndpoint(1025, 1025, name: "smtp")
-    .WithHttpEndpoint(1080, 1080)
-    .WithLifetime(ContainerLifetime.Persistent);
-
 var rabbitmq = builder.AddRabbitMQ("rabbitmq")
     .WithContainerName("rabbitmq.aspire")
     .WithManagementPlugin()
@@ -48,9 +42,7 @@ var inventory = builder.AddProject<Projects.Inventory>("inventory")
     .WaitFor(inventoryDb);
 
 var notification = builder.AddProject<Projects.Notification>("notification")
-    .WithReference(maildev.GetEndpoint("smtp"))
     .WithReference(rabbitmq)
-    .WaitFor(maildev)
     .WaitFor(rabbitmq);
 
 var order = builder.AddProject<Projects.Order>("order")
