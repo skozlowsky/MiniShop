@@ -5,8 +5,6 @@ using Notification.Services.Abstractions;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-builder.AddServiceDefaults();
-
 builder.Services.Configure<SmtpSettings>(
     builder.Configuration.GetSection("SmtpSettings"));
 
