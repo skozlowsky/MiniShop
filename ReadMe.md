@@ -1,7 +1,7 @@
 # Mini Shop
 
 ## Zadanie
-
+Dodaj output cache to GET /api/categories w serwisie Catalog.
 
 ### Snippety
 
