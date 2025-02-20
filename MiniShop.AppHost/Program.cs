@@ -31,17 +31,12 @@ var rabbitmq = builder.AddRabbitMQ("rabbitmq")
     .WithManagementPlugin()
     .WithLifetime(ContainerLifetime.Persistent);
 
-var redis = builder.AddRedis("redis")
-    .WithContainerName("redis.aspire")
-    .WithLifetime(ContainerLifetime.Persistent);
 
 // apis
 
 var catalog = builder.AddProject<Projects.Catalog>("catalog")
     .WithReference(catalogDb)
-    .WithReference(redis)
-    .WaitFor(catalogDb)
-    .WaitFor(redis);
+    .WaitFor(catalogDb);
 
 var inventory = builder.AddProject<Projects.Inventory>("inventory")
     .WithReference(inventoryDb)

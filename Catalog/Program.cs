@@ -30,8 +30,6 @@ builder.Services.AddEndpoints(assembly);
 builder.Services.AddProblemDetails();
 builder.Services.AddCors();
 
-builder.AddRedisOutputCache("redis");
-
 var app = builder.Build();
 
 app.MapDefaultEndpoints();

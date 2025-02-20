@@ -1,5 +1,41 @@
 # Mini Shop
 
+## Zadanie
+
+
+### Snippety
+
+Paczki nuget:
+```xml
+<PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="9.0.0" />
+<PackageReference Include="Aspire.Hosting.Redis" Version="9.0.0"/>
+```
+
+Konfiguracja endpointa:
+```csharp
+app.MapGet("/cached", () => {}).CacheOutput();
+```
+
+Konfiguracja paczki klienckiej:
+
+```csharp
+builder.AddRedisOutputCache("nazwa_modulu_aspire");
+```
+
+<details>
+<summary>Rozwiązanie</summary>
+
+Hosting:
+```csharp
+var redis = builder.AddRedis("redis")
+    .WithContainerName("redis.aspire")
+    .WithLifetime(ContainerLifetime.Persistent);
+
+cachedApi.WithReference(redis);
+```
+
+</details>
+
 
 ## Test data
 ```sql
