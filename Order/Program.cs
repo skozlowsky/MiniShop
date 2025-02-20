@@ -19,9 +19,6 @@ var assembly = Assembly.GetExecutingAssembly();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddOpenTelemetry()
-    .WithMetrics(m => m.AddMeter("Order.Metrics"));
-
 builder.AddNpgsqlDbContext<OrderContext>("orderDb");
 
 builder.Services.AddMediatR(c => c.RegisterServicesFromAssembly(assembly));
