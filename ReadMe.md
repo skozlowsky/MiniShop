@@ -1,5 +1,34 @@
 # Mini Shop
 
+## Zadanie
+
+Chcemy dodać kolejny zasób do naszego projektu w .NET Aspire w celu wsparcia naszego wewnętrznego zespołu.
+
+Dodaj projekt ShopManagement do modelu aplikacji i upewnij się, że uruchamia się razem z naszą rozproszoną aplikacją. Klient HTTP w projekcie ShopManagement powinien używać service discovery do konfiguracji adresu projektu Inventory.
+
+Działanie aplikacji możesz sprawdzić poprzez odpytanie GET /api/stock
+
+<details>
+<summary>Rozwiązanie:</summary>
+
+1. Dodaj wspracie dla orkiestratora .NET Aspire do projektu ShopManagement.
+
+2. Dodaj referencję do projektu ShopManagement w modelu aplikacji.
+
+```
+var management = builder.AddProject<Projects.ShopManagement>("management")
+    .WithReference(inventory)
+    .WaitFor(inventory);
+```
+
+3. Użyj nazwy zasobu projektu Inventory w konfiguracji adresu bazowego klienta HTTP.
+
+```
+builder.Services.AddHttpClient("inventoryClient",
+    static client => client.BaseAddress = new("https+http://inventory"));
+```
+
+</details>
 
 ## Test data
 ```sql

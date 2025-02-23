@@ -7,9 +7,9 @@ var passwordDb = builder.AddParameter("passwordDb", "postgres", secret: true);
 // infrastructure
 
 var postgres = builder
-    .AddPostgres("postgres", usernameDb, passwordDb)
+    .AddPostgres("postgres")
     .WithContainerName("minishop.database.aspire")
-    //.WithDataVolume("minishop-db")
+    .WithDataVolume("minishop-db")
     .WithPgWeb(pgWeb => pgWeb
         .WithHostPort(15432)
         .WithContainerName("minishop.database.webconsole.aspire")
