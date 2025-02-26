@@ -15,7 +15,6 @@ var assembly = Assembly.GetExecutingAssembly();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 
-
 builder.Services.AddOpenTelemetry()
     .WithMetrics(m => m.AddMeter("Catalog.Metrics"));
 
