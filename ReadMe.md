@@ -1,14 +1,14 @@
 # Mini Shop
 
 ## Zadanie
-Dodaj output cache do endpointu GET /api/categories w serwisie Catalog.
+Dodaj output cache do endpointu GET **/api/categories** w serwisie Catalog.
 
 ## Instrukcja
 
 1. Dodaj integracje hostingową dla Redisa do AppHost
 2. Zadeklaruj odpowiedni zasób, a następnie połącz go z projektem Catalog. Użyj do tego **WithReference()**
 3. Dodaj odpowiednią konfigurację paczki klienckiej do projektu Catalog (patrz snippety)
-4. Skonfiguruj output cache dla endpointu /api/categories (patrz snippety)
+4. Skonfiguruj output cache dla endpointu **/api/categories** (patrz snippety)
 
 Sprwadź tracing ;)
 
@@ -52,6 +52,9 @@ cachedApi.WithReference(redis);
 
 ## Test data
 ```sql
+
+-- CATALOG DB
+
 INSERT INTO "Categories" ("Id", "Name", "Description") VALUES
     ('f47ac10b-58cc-4372-a567-0e02b2c3d479', 'Electronics', 'Electronic devices and accessories'),
     ('f47ac10b-58cc-4372-a567-0e02b2c3d480', 'Books', 'Physical and digital books'),
@@ -66,6 +69,8 @@ INSERT INTO "Products" ("Id", "Name", "Description", "Price", "IsActive", "Categ
     ('a47ac10b-58cc-4372-a567-0e02b2c3d482', 'Garden Tools Set', 'Complete set of essential garden tools', 129.99, true, 'f47ac10b-58cc-4372-a567-0e02b2c3d481', ARRAY['garden', 'tools', 'outdoor']),
     ('a47ac10b-58cc-4372-a567-0e02b2c3d483', 'Tennis Racket Pro', 'Professional grade tennis racket', 199.99, true, 'f47ac10b-58cc-4372-a567-0e02b2c3d482', ARRAY['sports', 'tennis', 'equipment']),
     ('a47ac10b-58cc-4372-a567-0e02b2c3d484', 'Tablet Y', 'Compact tablet for entertainment', 299.99, false, 'f47ac10b-58cc-4372-a567-0e02b2c3d479', ARRAY['electronics', 'tablet', 'mobile']);
+
+-- INVENTORY DB
 
 -- Items
 INSERT INTO "Items" ("Id", "Sku", "Name", "AvailableQuantity", "ReservedQuantity", "Price", "CreatedAt", "UpdatedAt") VALUES
