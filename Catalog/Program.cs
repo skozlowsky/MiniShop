@@ -43,8 +43,6 @@ app.UseCors(c => c
     .AllowAnyMethod()
     .AllowAnyHeader());
 
-app.UseOutputCache();
-
 app.Run();
 
 
