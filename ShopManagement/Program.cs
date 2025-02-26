@@ -6,7 +6,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddHttpClient("inventoryClient",
-    client => client.BaseAddress = new("http://localhost:5003"));
+    client => client.BaseAddress = new("http://where_should_i_do_request?"));
 
 var app = builder.Build();
 
